@@ -4,15 +4,44 @@ import { HomePage } from "../pages/HomePage/HomePage"
 import { ProfilePage } from "../pages/ProfilePage/ProfilePage"
 import { CreateEventPage } from "../pages/CreateEventPage/CreateEventPage"
 import { EditEventPage } from "../pages/EditEventPage/EditEventPage"
+import { ProtectedRoute } from "../components/ProtectedRoute/ProtectedRoute"
 
 export const Router = () => {
   return (
     <Routes>
       <Route path="/login" element={<LoginPage />} />
-      <Route path="/home" element={<HomePage />} />
-      <Route path="/profile" element={<ProfilePage />} />
-      <Route path="/create-event" element={<CreateEventPage />} />
-      <Route path="/edit-event/:id" element={<EditEventPage />} />
+      <Route 
+        path="/home" 
+        element={
+          <ProtectedRoute>
+            <HomePage />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/profile" 
+        element={
+          <ProtectedRoute>
+            <ProfilePage />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/create-event" 
+        element={
+          <ProtectedRoute>
+            <CreateEventPage />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/edit-event/:id" 
+        element={
+          <ProtectedRoute>
+            <EditEventPage />
+          </ProtectedRoute>
+        } 
+      />
       <Route path="/" element={<Navigate to="/login" replace />} />
     </Routes>
   )
