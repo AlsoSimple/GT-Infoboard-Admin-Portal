@@ -1,10 +1,5 @@
+import { Router } from "./router/Router"
 
-function App() {
-
-  return (
-    <>
-    </>
-  )
+export const App = () => {
+  return <Router />
 }
-
-export default App
