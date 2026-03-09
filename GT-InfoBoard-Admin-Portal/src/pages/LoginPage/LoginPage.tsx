@@ -1,15 +1,14 @@
 import style from './LoginPage.module.scss'
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-//fjern udkommentering når router er sat op, og tilføj import for useNavigate
 
 export function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     const API_URL = 'http://localhost:5001/auth/login'; // adjust port/path as needed
     const response = await fetch(API_URL, {

@@ -1,12 +1,5 @@
-import { LoginPage } from "./pages/LoginPage/LoginPage"
+import { Router } from "./router/Router"
 
-function App() {
-
-  return (
-    <>
-    <LoginPage />
-    </>
-  )
+export const App = () => {
+  return <Router />
 }
-
-export default App
