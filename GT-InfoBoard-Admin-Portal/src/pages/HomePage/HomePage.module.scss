@@ -1,0 +1,25 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1;
+  padding: 2rem;
+}
+
+.createButton {
+  display: block;
+  margin: 0 auto 2rem;
+  padding: 0.75rem 2rem;
+  background-color: #999;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.eventsList {
+  max-width: 800px;
+  margin: 0 auto;
+}
