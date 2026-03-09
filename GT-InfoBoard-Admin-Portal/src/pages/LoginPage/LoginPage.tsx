@@ -2,6 +2,7 @@ import style from './LoginPage.module.scss'
 
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { usePost } from '../../hooks/usePost';
 
 export function LoginPage() {
   const [username, setUsername] = useState('');
@@ -14,23 +15,23 @@ export function LoginPage() {
     }
   }, [navigate]);
 
-  const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const API_URL = 'http://localhost:5001/auth/login'; // adjust port/path as needed
-    const response = await fetch(API_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password }),
-    });
-    const data = await response.json();
-    console.log('Login response:', data);
-    if (response.ok && data.token) {
+  const { data, isLoading, error, post } = usePost('http://localhost:5001/auth/login');
+
+  useEffect(() => {
+    if (data && data.token) {
       localStorage.setItem('token', data.token);
       navigate('/home');
-    } else {
-      // Handle login failure (e.g., show error message)
+    } else if (data && !data.token) {
       alert('Login failed: ' + (data.message || 'Unknown error'));
     }
+    if (error) {
+      alert('Login failed: ' + error);
+    }
+  }, [data, error, navigate]);
+
+  const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    post({ username, password });
   };
 
   return (
@@ -40,7 +41,7 @@ export function LoginPage() {
         <form onSubmit={handleSubmit}>
           <input className={style.input} value={username} onChange={e => setUsername(e.target.value)} placeholder="User" />
           <input className={style.input} type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" />
-          <button className={style.button} type="submit">Sign In</button>
+          <button className={style.button} type="submit" disabled={isLoading}>Sign In</button>
         </form>
       </div>
     </div>
