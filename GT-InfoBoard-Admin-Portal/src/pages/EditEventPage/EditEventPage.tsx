@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useFetchV2 } from '../../hooks/useFetchV2';
 import { useParams } from 'react-router-dom';
 import style from './EditEventPage.module.scss';
+import { Navigation } from '../../components/navigation/Navigation';
 
   
 
@@ -102,6 +103,7 @@ export function EditEventPage() {
 
   return (
     <div className={style.editEventPage}>
+      <Navigation />
       <h1>Edit Event</h1>
       <form onSubmit={handleSubmit}>
         <div>
