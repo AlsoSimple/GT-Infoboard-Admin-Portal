@@ -19,7 +19,11 @@ export function useFetch<T>(url: string): FetchResult<T> {
       setError(null);
 
       try {
-        const res = await fetch(url);
+        const token = localStorage.getItem('token');
+        const headers: HeadersInit = { 'Content-Type': 'application/json' };
+        if (token) headers['Authorization'] = `Bearer ${token}`;
+
+        const res = await fetch(url, { headers });
 
         if (!res.ok) {
           throw new Error(`Error status: ${res.status}`);
