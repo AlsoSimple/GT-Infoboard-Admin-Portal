@@ -3,6 +3,7 @@ import { Button } from '../../components/button/Button';
 import { EventCard } from '../../components/event/EventCard';
 import { useFetch } from '../../hooks/useFetch';
 import styles from './HomePage.module.scss';
+import { useNavigate } from 'react-router-dom';
 
 interface Event {
   id: string;
@@ -27,6 +28,7 @@ const getMonthLabel = (iso: string) =>
 
 export const HomePage = () => {
   const { data, isLoading, error } = useFetch<EventsResponse>('http://localhost:5001/events');
+  const navigate = useNavigate();
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -47,7 +49,7 @@ export const HomePage = () => {
     <div className={styles.container}>
       <Navigation />
       <main className={styles.main}>
-        <Button onClick={() => console.log('Create event button clicked')}>Create new Event</Button>
+        <Button onClick={() => navigate('/create-event')}>Create new Event</Button>
         <div className={styles.eventsContainer}>
           {isLoading && <p>Loading events...</p>}
           {error && <p>Failed to load events: {error}</p>}
@@ -62,7 +64,7 @@ export const HomePage = () => {
                   key={event.id}
                   date={formatDate(event.startDate)}
                   text={event.text.length > 35 ? event.text.slice(0, 35) + '...' : event.text}
-                  onEdit={() => console.log('Edit', event.id)}
+                  onEdit={() => navigate(`/edit-event/${event.id}`)}
                   onDelete={() => console.log('Delete', event.id)}
                 />
               ))}

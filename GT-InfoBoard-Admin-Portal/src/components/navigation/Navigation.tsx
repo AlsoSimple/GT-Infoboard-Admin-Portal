@@ -1,6 +1,7 @@
 import styles from './Navigation.module.scss';
 import { useEffect, useState } from 'react';
 import { FaUser } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 interface UserData {
   status: string;
@@ -13,6 +14,7 @@ interface UserData {
 }
 
 export const Navigation = () => {
+  const navigate = useNavigate();
   const [user, setUser] = useState<UserData | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -54,12 +56,14 @@ export const Navigation = () => {
 
   return (
     <nav className={styles.navigation}>
-      <h1 className={styles.title}>Home</h1>
+      <h1 className={styles.title} style={{ cursor: 'pointer' }} onClick={() => navigate('/home')}>
+        Home
+      </h1>
       <div className={styles.userSection}>
         <h2>
           {isLoading ? 'Loading...' : error ? 'User' : user?.data?.username || 'User'}
         </h2>
-        <button className={styles.userIcon}><FaUser size={20} /></button>
+        <button className={styles.userIcon} onClick={() => navigate('/profile')}><FaUser size={20} /></button>
       </div>
     </nav>
   );
