@@ -5,7 +5,7 @@ export interface PostResult<T> {
   data: T | undefined;
   isLoading: boolean;
   error: string | null;
-  post: (body: any) => Promise<void>;
+  post: (body: any, headers?: Record<string, string>) => Promise<void>;
 }
 
 /** Post hook — pass a URL, returns post function, data, loading, and error state */
@@ -14,13 +14,13 @@ export function usePost<T>(url: string): PostResult<T> {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const post = async (body: any) => {
+  const post = async (body: any, headers: Record<string, string> = {}) => {
     setIsLoading(true);
     setError(null);
     try {
       const res = await fetch(url, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', ...headers },
         body: JSON.stringify(body),
       });
       if (!res.ok) throw new Error(`Error status: ${res.status}`);
