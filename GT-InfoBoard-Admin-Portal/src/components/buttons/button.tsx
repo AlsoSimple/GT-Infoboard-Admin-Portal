@@ -1,9 +1,28 @@
-import style from "./button.module.scss";
+import styles from './Button.module.scss';
 
-interface ButtonInterface {
-  textValue: string;
+interface ButtonProps {
+  children: React.ReactNode;
+  onClick?: () => void;
+  type?: 'button' | 'submit';
+  disabled?: boolean;
+  className?: string;
 }
-// ButtonInterFace Componenet
-export function Button({ textValue }: ButtonInterface) {
-  return <button className={style.minButton}>{textValue}</button>;
-}
+
+export const Button = ({
+  children,
+  onClick,
+  type = 'button',
+  disabled = false,
+  className,
+}: ButtonProps) => {
+  return (
+    <button
+      className={${styles.button}${className ?  ${className} : ''}}
+      onClick={onClick}
+      type={type}
+      disabled={disabled}
+    >
+      {children}
+    </button>
+  );
+};
