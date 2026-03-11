@@ -17,7 +17,7 @@ export const Button = ({
 }: ButtonProps) => {
   return (
     <button
-      className={${styles.button}${className ?  ${className} : ''}}
+      className={`${styles.button}${className ? ` ${className}` : ''}`}
       onClick={onClick}
       type={type}
       disabled={disabled}
