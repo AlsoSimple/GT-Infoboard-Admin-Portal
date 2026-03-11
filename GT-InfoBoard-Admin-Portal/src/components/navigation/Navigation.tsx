@@ -1,5 +1,6 @@
 import styles from './Navigation.module.scss';
 import { useEffect, useState } from 'react';
+import { FaUser } from 'react-icons/fa';
 
 interface UserData {
   status: string;
@@ -58,7 +59,7 @@ export const Navigation = () => {
         <h2>
           {isLoading ? 'Loading...' : error ? 'User' : user?.data?.username || 'User'}
         </h2>
-        <button className={styles.userIcon}></button>
+        <button className={styles.userIcon}><FaUser size={20} /></button>
       </div>
     </nav>
   );
