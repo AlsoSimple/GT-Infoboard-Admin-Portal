@@ -1,0 +1,105 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  background-color: #97a5be;
+  border-radius: 8px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 600px;
+  height: fit-content;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.sectionTitle {
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  label {
+    width: 160px;
+    flex-shrink: 0;
+    font-size: 0.95rem;
+  }
+
+  input {
+    flex: 1;
+    padding: 0.4rem 0.6rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    background-color: #fff;
+    outline: none;
+
+    &:focus {
+      box-shadow: 0 0 0 2px #555;
+    }
+  }
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  margin: 1.5rem 0;
+}
+
+.error {
+  color: #b00020;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.success {
+  color: #1a6b2f;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.hint {
+  font-size: 0.875rem;
+  color: #555;
+  margin: 0;
+}
+
+.userList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.userItem {
+  background-color: rgba(255, 255, 255, 0.45);
+  border-radius: 4px;
+  padding: 0.45rem 0.75rem;
+  font-size: 0.95rem;
+}
