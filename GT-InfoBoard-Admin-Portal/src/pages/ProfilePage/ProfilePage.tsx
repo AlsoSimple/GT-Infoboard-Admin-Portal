@@ -89,7 +89,6 @@ export const ProfilePage = () => {
 
   return (
     <div className={styles.container}>
-      <Navigation />
       <main className={styles.main}>
         <div className={styles.card}>
 
