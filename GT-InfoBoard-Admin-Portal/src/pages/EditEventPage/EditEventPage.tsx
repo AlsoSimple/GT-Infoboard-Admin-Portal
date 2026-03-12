@@ -1,10 +1,17 @@
 import { useState, useEffect } from 'react';
-import { useFetchV2 } from '../../hooks/useFetchV2';
-import { useParams } from 'react-router-dom';
+import { useFetch } from '../../hooks/useFetch';
+import { useParams, useNavigate } from 'react-router-dom';
 import style from './EditEventPage.module.scss';
-import { Navigation } from '../../components/navigation/Navigation';
 
-  
+
+
+interface EventResponse {
+  data: {
+    text: string;
+    startDate: string;
+    endDate: string;
+  }; 
+}
 
 export function EditEventPage() {
   // Get event id from route params
@@ -13,12 +20,14 @@ export function EditEventPage() {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const maxChars = 600;
+  const navigate = useNavigate();
+  
+
+
 
   // Fetch the event data with Authorization header
-  const token = localStorage.getItem('token');
-  const { data: event, isLoading, error } = useFetchV2(
-    `https://gt-infoboardapi-production.up.railway.app/events/${eventId}`,
-    token ? { Authorization: `Bearer ${token}` } : {}
+  const { data: event, isLoading, error } = useFetch<EventResponse>(
+    `https://gt-infoboardapi-production.up.railway.app/events/${eventId}`
   );
   // Populate form fields when event is loaded
   useEffect(() => {
@@ -65,6 +74,7 @@ export function EditEventPage() {
       startDate: toISOStringWithZ(startDate, '00:00'),
       endDate: toISOStringWithZ(endDate, '23:59'),
     };
+    const token = localStorage.getItem('token');
     try {
       const res = await fetch(`https://gt-infoboardapi-production.up.railway.app/events/${eventId}`, {
         method: 'PATCH',
@@ -83,6 +93,7 @@ export function EditEventPage() {
 
   const handleDelete = async () => {
     if (!window.confirm('Are you sure you want to delete this event?')) return;
+    const token = localStorage.getItem('token');
     try {
       const res = await fetch(`https://gt-infoboardapi-production.up.railway.app/events/${eventId}`, {
         method: 'DELETE',
@@ -92,7 +103,7 @@ export function EditEventPage() {
       });
       if (!res.ok) throw new Error(`Error status: ${res.status}`);
       alert('Event deleted!');
-      // Optionally redirect or clear form here
+      navigate('/home');
     } catch (err) {
       alert('Failed to delete event: ' + (err instanceof Error ? err.message : err));
     }

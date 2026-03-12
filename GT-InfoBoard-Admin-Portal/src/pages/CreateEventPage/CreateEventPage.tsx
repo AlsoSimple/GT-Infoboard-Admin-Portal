@@ -2,12 +2,23 @@ import { useState } from 'react';
 import { usePost } from '../../hooks/usePost';
 import style from './CreateEventPage.module.scss'
 
+// Define the expected response type for the event creation
+interface EventResponse {
+  data: {
+    text: string;
+    startDate: string;
+    endDate: string;
+    // Add other fields if needed
+  };
+  // Add other top-level fields if needed
+}
+
 export const CreateEventPage = () => {
   const [text, setText] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const maxChars = 600;
-  const { data, isLoading, error, post } = usePost('https://gt-infoboardapi-production.up.railway.app/events');
+  const { data, isLoading, error, post } = usePost<EventResponse>('https://gt-infoboardapi-production.up.railway.app/events');
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

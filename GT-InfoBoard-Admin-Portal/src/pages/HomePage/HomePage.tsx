@@ -1,4 +1,3 @@
-import { Navigation } from '../../components/navigation/Navigation';
 import { Button } from '../../components/button/Button';
 import { EventCard } from '../../components/event/EventCard';
 import { useFetch } from '../../hooks/useFetch';

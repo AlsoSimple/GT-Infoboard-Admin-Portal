@@ -4,6 +4,13 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { usePost } from "../../hooks/usePost";
 
+// Define the expected response type for the login
+interface LoginResponse {
+  token?: string;
+  message?: string;
+  // Add other fields if needed
+}
+
 export function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -15,7 +22,7 @@ export function LoginPage() {
     }
   }, [navigate]);
 
-  const { data, isLoading, error, post } = usePost(
+  const { data, isLoading, error, post } = usePost<LoginResponse>(
     "https://gt-infoboardapi-production.up.railway.app/auth/login",
   );
 
