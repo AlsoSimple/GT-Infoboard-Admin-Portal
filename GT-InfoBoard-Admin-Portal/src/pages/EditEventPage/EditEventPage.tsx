@@ -156,13 +156,13 @@ export function EditEventPage() {
           )}
         </div>
         <div style={{ marginTop: 16 }}>
-          <button
+          <Button
             type="button"
             onClick={handleDelete}
             style={{ marginRight: 8 }}
           >
             Delete
-          </button>
+          </Button>
           <Button type="submit">Accept</Button>
         </div>
       </form>
