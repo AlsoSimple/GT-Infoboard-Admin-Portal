@@ -7,7 +7,7 @@ export const CreateEventPage = () => {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const maxChars = 600;
-  const { data, isLoading, error, post } = usePost('http://localhost:5001/events');
+  const { data, isLoading, error, post } = usePost('https://gt-infoboardapi-production.up.railway.app/events');
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

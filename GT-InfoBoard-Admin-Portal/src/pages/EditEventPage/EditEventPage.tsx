@@ -17,7 +17,7 @@ export function EditEventPage() {
   // Fetch the event data with Authorization header
   const token = localStorage.getItem('token');
   const { data: event, isLoading, error } = useFetchV2(
-    `http://localhost:5001/events/${eventId}`,
+    `https://gt-infoboardapi-production.up.railway.app/events/${eventId}`,
     token ? { Authorization: `Bearer ${token}` } : {}
   );
   // Populate form fields when event is loaded
@@ -66,7 +66,7 @@ export function EditEventPage() {
       endDate: toISOStringWithZ(endDate, '23:59'),
     };
     try {
-      const res = await fetch(`http://localhost:5001/events/${eventId}`, {
+      const res = await fetch(`https://gt-infoboardapi-production.up.railway.app/events/${eventId}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -84,7 +84,7 @@ export function EditEventPage() {
   const handleDelete = async () => {
     if (!window.confirm('Are you sure you want to delete this event?')) return;
     try {
-      const res = await fetch(`http://localhost:5001/events/${eventId}`, {
+      const res = await fetch(`https://gt-infoboardapi-production.up.railway.app/events/${eventId}`, {
         method: 'DELETE',
         headers: {
           ...(token ? { Authorization: `Bearer ${token}` } : {}),

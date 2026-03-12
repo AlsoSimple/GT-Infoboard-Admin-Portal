@@ -35,7 +35,7 @@ export const ProfilePage = () => {
   // Users list (refreshes after creating user)
   const [refreshKey, setRefreshKey] = useState(0);
   const { data: usersData, isLoading: usersLoading, error: usersError } =
-    useFetch<UsersResponse>(`http://localhost:5001/users?_=${refreshKey}`);
+    useFetch<UsersResponse>(`https://gt-infoboardapi-production.up.railway.app/users?_=${refreshKey}`);
 
   const authHeaders: Record<string, string> = {
     'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ export const ProfilePage = () => {
     setPasswordError(null);
     setPasswordSuccess(false);
     try {
-      const res = await fetch('http://localhost:5001/users/me/password', {
+      const res = await fetch('https://gt-infoboardapi-production.up.railway.app/users/me/password', {
         method: 'PATCH',
         headers: authHeaders,
         body: JSON.stringify({ currentPassword, newPassword }),
@@ -70,7 +70,7 @@ export const ProfilePage = () => {
     setCreateError(null);
     setCreateSuccess(false);
     try {
-      const res = await fetch('http://localhost:5001/users', {
+      const res = await fetch('https://gt-infoboardapi-production.up.railway.app/users', {
         method: 'POST',
         headers: authHeaders,
         body: JSON.stringify({ username: newUsername, password: tempPassword }),

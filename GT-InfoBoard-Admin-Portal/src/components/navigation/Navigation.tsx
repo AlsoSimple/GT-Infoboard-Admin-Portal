@@ -34,7 +34,7 @@ export const Navigation = () => {
           headers['Authorization'] = `Bearer ${token}`;
         }
 
-        const response = await fetch('http://localhost:5001/users/me', { headers });
+        const response = await fetch('https://gt-infoboardapi-production.up.railway.app/users/me', { headers });
 
         if (!response.ok) {
           throw new Error(`Error status: ${response.status}`);

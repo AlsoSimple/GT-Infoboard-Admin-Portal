@@ -27,7 +27,7 @@ const getMonthLabel = (iso: string) =>
   new Date(iso).toLocaleDateString('da-DK', { month: 'long', year: 'numeric' });
 
 export const HomePage = () => {
-  const { data, isLoading, error } = useFetch<EventsResponse>('http://localhost:5001/events');
+  const { data, isLoading, error } = useFetch<EventsResponse>('https://gt-infoboardapi-production.up.railway.app/events');
   const navigate = useNavigate();
 
   const today = new Date();
