@@ -1,19 +1,22 @@
-import { useState } from 'react';
-import { usePost } from '../../hooks/usePost';
-import style from './CreateEventPage.module.scss'
+import { useState } from "react";
+import { usePost } from "../../hooks/usePost";
+import style from "./CreateEventPage.module.scss";
+import { Button } from "../../components/button/Button";
 
 export const CreateEventPage = () => {
-  const [text, setText] = useState('');
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
+  const [text, setText] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const maxChars = 600;
-  const { data, isLoading, error, post } = usePost('http://localhost:5001/events');
+  const { data, isLoading, error, post } = usePost(
+    "http://localhost:5001/events",
+  );
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Convert datetime-local (YYYY-MM-DDTHH:mm) to ISO string with Z (UTC)
     const toISOStringWithZ = (val: string, defaultTime?: string) => {
-      if (!val) return '';
+      if (!val) return "";
       let value = val;
       // If only date is provided (YYYY-MM-DD), append default time
       if (/^\d{4}-\d{2}-\d{2}$/.test(val) && defaultTime) {
@@ -22,22 +25,22 @@ export const CreateEventPage = () => {
       const date = new Date(value);
       return date.toISOString();
     };
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     post(
       {
         text,
-        startDate: toISOStringWithZ(startDate, '00:00'), // default to 00:00 if only date
-        endDate: toISOStringWithZ(endDate, '23:59'), // default to 23:59 if only date
+        startDate: toISOStringWithZ(startDate, "00:00"), // default to 00:00 if only date
+        endDate: toISOStringWithZ(endDate, "23:59"), // default to 23:59 if only date
       },
-      token ? { Authorization: `Bearer ${token}` } : {}
+      token ? { Authorization: `Bearer ${token}` } : {},
     );
   };
 
   // API'et forventer ikke dansk format, så inputtet viser ikke dansk format
   // Helper to format YYYY-MM-DD to DD-MM-YYYY
   const formatDanishDate = (val: string) => {
-    if (!val) return '';
-    const [y, m, d] = val.split('-');
+    if (!val) return "";
+    const [y, m, d] = val.split("-");
     if (!y || !m || !d) return val;
     return `${d}-${m}-${y}`;
   };
@@ -51,7 +54,7 @@ export const CreateEventPage = () => {
           <textarea
             maxLength={maxChars}
             value={text}
-            onChange={e => setText(e.target.value)}
+            onChange={(e) => setText(e.target.value)}
             placeholder="Text"
           />
           <div>
@@ -63,11 +66,11 @@ export const CreateEventPage = () => {
           <input
             type="date"
             value={startDate}
-            onChange={e => setStartDate(e.target.value)}
+            onChange={(e) => setStartDate(e.target.value)}
             required
           />
           {startDate && (
-            <div style={{ fontSize: 12, color: '#555' }}>
+            <div style={{ fontSize: 12, color: "#555" }}>
               Dansk format: {formatDanishDate(startDate)}
             </div>
           )}
@@ -77,16 +80,18 @@ export const CreateEventPage = () => {
           <input
             type="date"
             value={endDate}
-            onChange={e => setEndDate(e.target.value)}
+            onChange={(e) => setEndDate(e.target.value)}
             required
           />
           {endDate && (
-            <div style={{ fontSize: 12, color: '#555' }}>
+            <div style={{ fontSize: 12, color: "#555" }}>
               Dansk format: {formatDanishDate(endDate)}
             </div>
           )}
         </div>
-        <button type="submit" disabled={isLoading}>Submit</button>
+        <Button type="submit" disabled={isLoading}>
+          Submit
+        </Button>
       </form>
       {error && <div>{error}</div>}
       {data && <div>Event created!</div>}
