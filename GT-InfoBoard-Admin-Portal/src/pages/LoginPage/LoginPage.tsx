@@ -16,7 +16,7 @@ export function LoginPage() {
   }, [navigate]);
 
   const { data, isLoading, error, post } = usePost(
-    "http://localhost:5001/auth/login",
+    "https://gt-infoboardapi-production.up.railway.app/auth/login",
   );
 
   useEffect(() => {
