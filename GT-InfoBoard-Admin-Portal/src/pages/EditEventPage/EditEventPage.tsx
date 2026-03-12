@@ -103,7 +103,6 @@ export function EditEventPage() {
 
   return (
     <div className={style.editEventPage}>
-      <Navigation />
       <h1>Edit Event</h1>
       <form onSubmit={handleSubmit}>
         <div>

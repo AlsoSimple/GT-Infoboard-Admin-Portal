@@ -47,7 +47,6 @@ export const HomePage = () => {
 
   return (
     <div className={styles.container}>
-      <Navigation />
       <main className={styles.main}>
         <Button onClick={() => navigate('/create-event')}>Create new Event</Button>
         <div className={styles.eventsContainer}>

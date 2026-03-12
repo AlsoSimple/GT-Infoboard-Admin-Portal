@@ -5,10 +5,12 @@ import { ProfilePage } from "../pages/ProfilePage/ProfilePage"
 import { CreateEventPage } from "../pages/CreateEventPage/CreateEventPage"
 import { EditEventPage } from "../pages/EditEventPage/EditEventPage"
 import { ProtectedRoute } from "../components/ProtectedRoute/ProtectedRoute"
+import { MainLayout } from '../layouts/MainLayout'
 
 export const Router = () => {
   return (
     <Routes>
+      <Route element={<MainLayout />} >
       <Route path="/login" element={<LoginPage />} />
       <Route 
         path="/home" 
@@ -43,6 +45,7 @@ export const Router = () => {
         } 
       />
       <Route path="/" element={<Navigate to="/login" replace />} />
+    </Route>
     </Routes>
   )
 }
